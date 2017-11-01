@@ -61,10 +61,7 @@ app.set('port', 3000);
 
 const server = http.createServer(app);
 
-server.listen(app.get('port'), function() {
-	process.stdout.write('--- App is running, server is listening on port ' + app.get('port') + ' ---\n');
-});
-server.listen(app.get('port'), function() {
+server.listen(app.get('port'), () => {
 	process.stdout.write('--- App is running, server is listening on port ' + app.get('port') + ' ---\n');
 });
 server.on('error', onError);
