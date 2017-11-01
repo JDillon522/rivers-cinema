@@ -2,6 +2,7 @@
  * Largely ignore this. Its just a cobbled together express server to serve it on Heroku.
  * Its just the bulk of the express boilerplate to get it up.
  */
+require('dotenv').load();
 
 const express = require('express');
 const path = require('path');
