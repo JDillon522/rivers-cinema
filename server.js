@@ -53,7 +53,7 @@ app.use((err, req, res, next) => {
 	res.status(err.status || 500);
 });
 
-app.set('port', 3000);
+app.set('port', process.env.PORT || 3000);
 
 /**
  * Create HTTP server.
@@ -71,7 +71,7 @@ function onError(error) {
 		throw error;
 	}
 
-	const bind = 'Port 3000';
+	const bind = `Port ${process.env.PORT || 3000}`;
 
 	// handle specific listen errors with friendly messages
 	switch (error.code) {
