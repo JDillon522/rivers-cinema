@@ -2,7 +2,9 @@
   <mat-card  color="primary">
     <mat-card-title>one</mat-card-title>
     <mat-card-subtitle>text text text</mat-card-subtitle>
-    <mat-card-content>Lots of text Lots of text Lots of text Lots of text Lots of text Lots of text Lots of text </mat-card-content>
+
+    <img mat-card-img src="../../assets/img/posterTemplate.jpg" mdTooltip="Create a new list">
+
     <mat-card-actions align="end">
       <button mat-icon-button color="primary">
         <mat-icon matTooltip="Edit">edit</mat-icon>
@@ -11,10 +13,12 @@
         <mat-icon matTooltip="Delete">delete_forever</mat-icon>
       </button>
     </mat-card-actions>
+
   </mat-card>
 
   <mat-card (click)="openCreateAMovieListDialog()" class="addNewListCard">
     <mat-card-title>Create A New Movie List</mat-card-title>
+
     <img mat-card-img src="../../assets/img/posterTemplate.jpg" mdTooltip="Create a new list">
 
     <mat-card-actions align="end">
@@ -24,5 +28,4 @@
     </mat-card-actions>
 
   </mat-card>
-
 </div>

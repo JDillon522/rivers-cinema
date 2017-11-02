@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import {
   MatCardModule, MatToolbarModule, MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule, MatGridListModule,
-  MatTooltipModule
+  MatTooltipModule, MatFormFieldModule, MatInputModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { FourOFourComponent } from './four-o-four/four-o-four.component';
@@ -15,6 +17,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './core/application-state';
 import { ListEffects } from './core/effects/list.effect';
+import { SearchService } from './services/search/search.service';
+import { SearchEffects } from './core/effects/search.effect';
 
 @NgModule({
   declarations: [
@@ -26,8 +30,12 @@ import { ListEffects } from './core/effects/list.effect';
   imports: [
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([
-      ListEffects
+      ListEffects,
+      SearchEffects
     ]),
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatCardModule,
     MatToolbarModule,
@@ -38,10 +46,13 @@ import { ListEffects } from './core/effects/list.effect';
     MatDialogModule,
     AppRoutingModule,
     MatGridListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
-    DialogService
+    DialogService,
+    SearchService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

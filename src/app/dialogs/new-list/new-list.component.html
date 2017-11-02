@@ -1,3 +1,13 @@
-<p>
-  new-list works!
-</p>
+<h2 mat-dialog-content>Create A New Movie List</h2>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <input matInput placeholder="Search" [(ngModel)]="searchInput">
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="createList()">
+    Save<mat-icon>save</mat-icon>
+  </button>
+</mat-dialog-actions>
