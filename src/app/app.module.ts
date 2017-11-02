@@ -21,6 +21,9 @@ import { SearchService } from './services/search/search.service';
 import { SearchEffects } from './core/effects/search.effect';
 import { ServiceInterceptor } from './services/service.interceptor';
 import { LogPipe } from './pipes/log/log.pipe';
+import { ListDetailsComponent } from './list-details/list-details.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,9 @@ import { LogPipe } from './pipes/log/log.pipe';
     FourOFourComponent,
     DashboardComponent,
     NewListComponent,
-    LogPipe
+    LogPipe,
+    ListDetailsComponent,
+    MovieDetailsComponent
   ],
   imports: [
     StoreModule.forRoot(reducers, { metaReducers }),

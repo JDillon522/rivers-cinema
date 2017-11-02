@@ -1,17 +1,25 @@
 <div class="cardContainer">
-  <mat-card  color="primary" *ngFor="let list of ( movieList$ | async )">
-    <mat-card-title>{{list?.name}}</mat-card-title>
-    <mat-card-subtitle>text text text</mat-card-subtitle>
+  <mat-card  color="primary" *ngFor="let list of ( movieLists$ | async )">
+    <mat-card-title class="nestedRouterLink" (click)="navToListDetails(list)">{{list?.name}}</mat-card-title>
+    <!-- <mat-card-subtitle>text text text</mat-card-subtitle> -->
 
-    <img mat-card-img src="../../assets/img/posterTemplate.jpg" mdTooltip="Create a new list">
+    <img
+      mat-card-img
+      [src]="list?.poster"
+      mdTooltip="Create a new list"
+      (click)="navToListDetails(list)"
+      class="nestedRouterLink">
 
     <mat-card-actions align="end">
+
       <button mat-icon-button color="primary">
         <mat-icon matTooltip="Edit">edit</mat-icon>
       </button>
+
       <button mat-icon-button color="warn">
         <mat-icon matTooltip="Delete">delete_forever</mat-icon>
       </button>
+
     </mat-card-actions>
 
   </mat-card>

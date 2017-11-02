@@ -5,6 +5,7 @@ import { NewListComponent } from '../dialogs/new-list/new-list.component';
 import { Observable } from 'rxjs/Observable';
 import { List } from '../core/models/list';
 import * as fromRoot from '../core/application-state';
+import * as ListActions from '../core/actions/list.actions';
 import { Store } from '@ngrx/store';
 
 
@@ -17,7 +18,7 @@ import { Store } from '@ngrx/store';
 export class DashboardComponent implements OnInit {
 
   public newListDialogReference: MatDialogRef<NewListComponent>;
-  public movieList$: Observable<List[]>;
+  public movieLists$: Observable<List[]>;
 
   constructor(
     public dialogService: DialogService,
@@ -26,7 +27,7 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.movieList$ = this.store.select(fromRoot.getMovieList);
+    this.movieLists$ = this.store.select(fromRoot.getMovieLists);
   }
 
   openCreateAMovieListDialog() {
@@ -34,5 +35,9 @@ export class DashboardComponent implements OnInit {
     this.newListDialogReference.afterClosed().subscribe(response => {
 
     });
+  }
+
+  navToListDetails(list: List) {
+    this.store.dispatch(new ListActions.GoToList(list.name));
   }
 }

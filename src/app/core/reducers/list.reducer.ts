@@ -5,16 +5,21 @@ import { CREATE_LIST } from '../actions/list.actions';
 
 export interface State {
   lists: { [key: string]: List };
+  selectedList: List | null;
 }
 
 const initialState: State = {
-  lists: { }
+  lists: { },
+  selectedList: null
 };
 
 export function reducer(state = initialState, action: listActions.Actions): State {
   switch (action.type) {
     case listActions.CREATE_LIST:
       return handleCreateList(state, action);
+
+    case listActions.SELECT_LIST:
+      return handleSelectList(state, action);
 
     default:
       return state;
@@ -25,10 +30,17 @@ export function handleCreateList(state, action) {
   const newStoreState = _.cloneDeep(state);
   const list: List = {
     name: action.payload.name,
-    movies: action.payload.movies || {}
+    movies: action.payload.movies || {},
+    poster: action.payload.poster || '../../assets/img/posterTemplate.jpg'
   };
   newStoreState.lists[list.name] = list;
   return newStoreState;
 }
 
-export const getMovieList = (state: State) => _.values(state.lists);
+export function handleSelectList(state, action) {
+  const newStoreState: State = _.cloneDeep(state);
+  newStoreState.selectedList = newStoreState.lists[action.payload];
+  return newStoreState;
+}
+
+export const getMovieLists = (state: State) => _.values(state.lists);
