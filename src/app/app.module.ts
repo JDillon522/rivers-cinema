@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   MatCardModule, MatToolbarModule, MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule, MatGridListModule,
-  MatTooltipModule, MatFormFieldModule, MatInputModule, MatListModule
+  MatTooltipModule, MatFormFieldModule, MatInputModule, MatListModule, MatExpansionModule, MatProgressSpinnerModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { FourOFourComponent } from './four-o-four/four-o-four.component';
@@ -52,7 +52,9 @@ import { LogPipe } from './pipes/log/log.pipe';
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
-    MatListModule
+    MatListModule,
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     DialogService,

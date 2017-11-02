@@ -1,5 +1,7 @@
 .cardContainer {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .addNewListCard {
@@ -7,7 +9,7 @@
 }
 
 mat-card {
-    max-width: 30%;
+    width: 300px;
     margin: 0.5em auto;
 
     &:hover {

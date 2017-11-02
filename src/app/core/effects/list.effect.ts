@@ -12,10 +12,6 @@ export class ListEffects {
         private store: Store<fromRoot.State>
     ) {}
 
-    @Effect({dispatch: false}) getLists$: Observable<Action> = this.actions$
-        .ofType(ListActions.GET_LISTS)
-        .do(action => {
-            console.log('woot');
-        });
+
 
 }

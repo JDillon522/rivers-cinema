@@ -9,14 +9,26 @@ router.post('/search', (req, res, next) => {
     const search = req.body.search;
 
     if (search.length) {
-        request.get(`http://www.omdbapi.com/?apikey=2d37af8b&s=${search}`, (error, response, body) => {
+        request.get(`http://www.omdbapi.com/?apikey=${process.env.API_KEY}&s=${search}`, (error, response, body) => {
+            res.setHeader('Content-Type', 'application/json');
             return res.status(200).send(body).end();
         });
     } else {
         return res.status(200).send({}).end();
     }
+});
 
+router.post('/movieData', (req, res, next) => {
+    const id = req.body.id;
 
+    if (id.length) {
+        request.get(`http://www.omdbapi.com/?apikey=${process.env.API_KEY}&i=${id}`, (error, response, body) => {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(200).send(body).end();
+        });
+    } else {
+        return res.status(200).send({}).end();
+    }
 });
 
 module.exports = router;

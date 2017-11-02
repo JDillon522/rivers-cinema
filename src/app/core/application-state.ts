@@ -17,4 +17,10 @@ export const metaReducers: MetaReducer<State>[] = [];
 
 // Search
 export const getSearchState = (state: State) => state.search;
-export const getSearchRestuls = createSelector(getSearchState, fromSearch.getSearchRestuls);
+export const getSearchRestuls = createSelector(getSearchState, fromSearch.getSearchRestulsMovies);
+export const getSearchError = createSelector(getSearchState, fromSearch.getSearchResultsError);
+export const getSelection = createSelector(getSearchState, fromSearch.getSelection);
+
+// Lists
+export const getListState = (state: State) => state.lists;
+export const getMovieList = createSelector(getListState, fromList.getMovieList);

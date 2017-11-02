@@ -9,3 +9,14 @@ body {
     min-width: 500px;
     min-height: 600px;
 }
+
+.form-row > * {
+    width: 100%;
+}
+
+.mat-progress-spinner.submit {
+    float: right;
+    width: 24px;
+    height: 24px;
+    margin: 5px 0px 0px 10px;
+}

@@ -1,18 +1,34 @@
 <h2 mat-dialog-content>Create A New Movie List</h2>
 
 <mat-dialog-content>
-  <mat-form-field>
-    <input matInput placeholder="Search" [(ngModel)]="searchInput">
-  </mat-form-field>
+	<div class="form-row">
+		<mat-form-field>
+			<input matInput placeholder="List Name" [(ngModel)]="listName">
+		</mat-form-field>
+		<mat-form-field >
+			<input matInput placeholder="Search for Movies" [(ngModel)]="searchInput">
+		</mat-form-field>
+	</div>
 
-  <mat-list dense>
-      <mat-list-item *ngFor="let movie of (searchResults$ | async)?.movies">{{movie?.Title}}</mat-list-item>
-      <mat-list-item *ngIf="!(searchResults$ | async)?.movies?.length">{{(searchResults$ | async)?.error}}</mat-list-item>
-  </mat-list>
+	<!-- <mat-selection-list #selectedMovies>
+		<mat-list-option *ngFor="let movie of ( searchResults$ | async)" [value]="movie">
+			{{movie?.Title}} - {{movie?.Year}}
+		</mat-list-option>
+	</mat-selection-list>
+
+	<mat-list *ngIf="(searchError$ | async)">
+		<mat-list-item>
+				{{(searchError$ | async)}}
+		</mat-list-item>
+	</mat-list> -->
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button mat-raised-button color="primary" (click)="createList()">
-    Save<mat-icon>save</mat-icon>
-  </button>
+	<button mat-raised-button color="accent" [mat-dialog-close]="false" [disabled]="loading">
+		Cancel
+	</button>
+	<button mat-raised-button color="primary" (click)="createList()" [disabled]="!listName || loading">
+		Save
+	</button>
 </mat-dialog-actions>
