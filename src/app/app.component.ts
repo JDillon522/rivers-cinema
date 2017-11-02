@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   openCreateAMovieListDialog() {
     this.newListDialogReference = this.matDialog.open(NewListComponent, this.dialogService.config);
     this.newListDialogReference.afterClosed().subscribe(response => {
-      console.log('closed')
+
     });
   }
 }

@@ -1,4 +1,29 @@
+.cardContainer {
+    display: flex;
+}
+
+.addNewListCard {
+    cursor: pointer;
+}
+
 mat-card {
-    max-width: 95%;
+    max-width: 30%;
     margin: 0.5em auto;
+
+    &:hover {
+        background-color: transparent;
+    }
+
+    img {
+        display: block;
+        max-width: 230px;
+        max-height: 300px;
+        width: auto;
+        height: auto;
+        margin: auto;
+    }
+}
+
+mat-grid-list {
+    margin-top: .5em;
 }
