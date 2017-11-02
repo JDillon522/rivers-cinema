@@ -14,3 +14,7 @@ export const reducers: ActionReducerMap<State> = {
 };
 
 export const metaReducers: MetaReducer<State>[] = [];
+
+// Search
+export const getSearchState = (state: State) => state.search;
+export const getSearchRestuls = createSelector(getSearchState, fromSearch.getSearchRestuls);

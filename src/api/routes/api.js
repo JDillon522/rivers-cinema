@@ -6,11 +6,16 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/search', (req, res, next) => {
-    const search = req.body;
+    const search = req.body.search;
 
-    request.get('http://www.omdbapi.com/?i=tt3896198&apikey=2d37af8b', (error, response, body) => {
-        return res.status(200).send(body).end();
-    })
+    if (search.length) {
+        request.get(`http://www.omdbapi.com/?apikey=2d37af8b&s=${search}`, (error, response, body) => {
+            return res.status(200).send(body).end();
+        });
+    } else {
+        return res.status(200).send({}).end();
+    }
+
 
 });
 

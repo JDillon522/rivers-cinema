@@ -7,7 +7,7 @@ export class DialogService {
   constructor() { }
 
   public config: MatDialogConfig = {
-
+    panelClass: ['rc-dialog']
   };
 
 }

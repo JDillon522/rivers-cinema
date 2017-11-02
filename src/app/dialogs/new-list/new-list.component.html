@@ -4,6 +4,11 @@
   <mat-form-field>
     <input matInput placeholder="Search" [(ngModel)]="searchInput">
   </mat-form-field>
+
+  <mat-list dense>
+      <mat-list-item *ngFor="let movie of (searchResults$ | async)?.movies">{{movie?.Title}}</mat-list-item>
+      <mat-list-item *ngIf="!(searchResults$ | async)?.movies?.length">{{(searchResults$ | async)?.error}}</mat-list-item>
+  </mat-list>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

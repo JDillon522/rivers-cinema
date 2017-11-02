@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   MatCardModule, MatToolbarModule, MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule, MatGridListModule,
-  MatTooltipModule, MatFormFieldModule, MatInputModule
+  MatTooltipModule, MatFormFieldModule, MatInputModule, MatListModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { FourOFourComponent } from './four-o-four/four-o-four.component';
@@ -20,13 +20,15 @@ import { ListEffects } from './core/effects/list.effect';
 import { SearchService } from './services/search/search.service';
 import { SearchEffects } from './core/effects/search.effect';
 import { ServiceInterceptor } from './services/service.interceptor';
+import { LogPipe } from './pipes/log/log.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     FourOFourComponent,
     DashboardComponent,
-    NewListComponent
+    NewListComponent,
+    LogPipe
   ],
   imports: [
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -49,7 +51,8 @@ import { ServiceInterceptor } from './services/service.interceptor';
     MatGridListModule,
     MatTooltipModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatListModule
   ],
   providers: [
     DialogService,

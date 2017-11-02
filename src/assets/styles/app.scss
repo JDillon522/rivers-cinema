@@ -4,3 +4,8 @@ body {
     // font-family: Roboto, sans-serif;
     background: map-get($map: $primary, $key: 50);
 }
+
+.rc-dialog {
+    min-width: 500px;
+    min-height: 600px;
+}

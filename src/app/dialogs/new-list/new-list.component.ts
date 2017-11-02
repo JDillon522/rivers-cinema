@@ -3,6 +3,8 @@ import * as fromRoot from '../../core/application-state';
 import { Store } from '@ngrx/store';
 import * as ListActions from '../../core/actions/list.actions';
 import * as SearchActions from '../../core/actions/search.action';
+import { Observable } from 'rxjs/Rx';
+import { MovieSearch } from '../../core/models/movie';
 
 @Component({
   selector: 'app-new-list',
@@ -10,6 +12,7 @@ import * as SearchActions from '../../core/actions/search.action';
   styleUrls: ['./new-list.component.scss']
 })
 export class NewListComponent implements OnInit {
+  public searchResults$: Observable<any>;
   private _searchInput: string = '';
 
   get searchInput(): string {
@@ -26,7 +29,7 @@ export class NewListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.searchResults$ = this.store.select(fromRoot.getSearchRestuls)
   }
 
   createList() {
