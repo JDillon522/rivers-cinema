@@ -17,7 +17,6 @@ export class NewListComponent implements OnInit {
   }
 
   set searchInput(term) {
-    console.log('INPUT', term)
     this.store.dispatch(new SearchActions.SubmitSearch(term));
     this._searchInput = term;
   }

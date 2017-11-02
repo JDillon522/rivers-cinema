@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   MatCardModule, MatToolbarModule, MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule, MatGridListModule,
   MatTooltipModule, MatFormFieldModule, MatInputModule
@@ -19,6 +19,7 @@ import { reducers, metaReducers } from './core/application-state';
 import { ListEffects } from './core/effects/list.effect';
 import { SearchService } from './services/search/search.service';
 import { SearchEffects } from './core/effects/search.effect';
+import { ServiceInterceptor } from './services/service.interceptor';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { SearchEffects } from './core/effects/search.effect';
   ],
   providers: [
     DialogService,
-    SearchService
+    SearchService,
+    { provide: HTTP_INTERCEPTORS, useClass: ServiceInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   entryComponents: [
