@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import * as fromRoot from '../../core/application-state';
 import { Store } from '@ngrx/store';
 import * as ListActions from '../../core/actions/list.actions';
@@ -6,7 +6,7 @@ import * as SearchActions from '../../core/actions/search.action';
 import { Observable } from 'rxjs/Rx';
 import { MovieSearch, Movie } from '../../core/models/movie';
 import * as _ from 'lodash';
-import { MatSelectionList, MatDialogRef } from '@angular/material';
+import { MatSelectionList, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { List } from '../../core/models/list';
 
 @Component({
@@ -17,6 +17,7 @@ import { List } from '../../core/models/list';
 export class NewListComponent implements OnInit {
   public searchError$: Observable<string>;
   public loading: boolean = false;
+  public editing: boolean = false;
 
   private _listName: string = '';
   private _searchInput: string = '';
@@ -59,10 +60,21 @@ export class NewListComponent implements OnInit {
 
   constructor(
     private store: Store<fromRoot.State>,
-    private dialogRef: MatDialogRef<NewListComponent>
+    private dialogRef: MatDialogRef<NewListComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: {
+      editing: boolean,
+      listName: string,
+      movies: Movie[]
+    }
   ) { }
 
   ngOnInit() {
+    if (this.data.editing) {
+      this.editing = true;
+      this.listName = this.data.listName;
+      this.store.dispatch(new SearchActions.PrepEditList(this.data));
+    }
+
     this.store.select(fromRoot.getSearchRestuls).subscribe(results => {
       this.searchResults = results;
     });
@@ -78,7 +90,7 @@ export class NewListComponent implements OnInit {
       movies: this.selectedMovies
     };
 
-    this.store.dispatch(new ListActions.CreateList(list));
+    this.store.dispatch(new ListActions.CreateList({list: list, editing: this.editing, changedName: this.data.listName}));
     this.loading = true;
     this.dialogRef.close();
     this.store.dispatch(new SearchActions.ClearSearch());

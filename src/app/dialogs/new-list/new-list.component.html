@@ -1,4 +1,5 @@
-<h2 mat-dialog-content>Create A New Movie List</h2>
+<h2 *ngIf="!editing; else editingHeader" mat-dialog-content>Create A New Movie List</h2>
+<ng-template #editingHeader><h2 mat-dialog-content>Edit {{data.listName}}</h2></ng-template>
 
 <mat-dialog-content>
 	<br>

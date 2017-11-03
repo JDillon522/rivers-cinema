@@ -35,6 +35,9 @@ export function reducer(state = initialState, action: searchActions.Actions): St
     case searchActions.CLEAR_SEARCH:
       return handleClearSearch(state, action);
 
+    case searchActions.PREP_EDIT_LIST:
+      return handlePrepEditList(state, action);
+
     default:
       return state;
   }
@@ -80,6 +83,14 @@ export function handleClearSearch(state, action) {
   newStoreState.error = '';
   newStoreState.movies = {};
   newStoreState.selection = {};
+  return newStoreState;
+}
+
+export function handlePrepEditList(state, action) {
+  const newStoreState: State = _.cloneDeep(state);
+  newStoreState.movies = {};
+  newStoreState.selection = _.keyBy(action.payload.movies, 'imdbID');
+  newStoreState.movieData = _.keyBy(action.payload.movies, 'imdbID');
   return newStoreState;
 }
 

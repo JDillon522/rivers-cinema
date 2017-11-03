@@ -9,6 +9,7 @@ export const SEARCH_MOVIE_SUCCESS = '[Search] Successfully searched for a movie 
 export const ADD_TO_SELECTION = '[Search] Add a movie from search to the temp collection';
 export const REMOVE_FROM_SELECTION = '[Search] Remove a movie from the temp collection';
 export const CLEAR_SEARCH = '[Search] Clear all the data';
+export const PREP_EDIT_LIST = '[Search] Prep all the necessary data to edit a list';
 
 export class SubmitSearch implements Action {
     readonly type = SUBMIT_SEARCH;
@@ -49,6 +50,11 @@ export class ClearSearch implements Action {
     readonly type = CLEAR_SEARCH;
 }
 
+export class PrepEditList implements Action {
+    readonly type = PREP_EDIT_LIST;
+    constructor(private payload) { }
+}
+
 export type Actions
     = SubmitSearch
     | SubmitSearchSuccess
@@ -57,4 +63,5 @@ export type Actions
     | SearchMovieSuccess
     | AddToSelection
     | RemoveFromSelection
-    | ClearSearch;
+    | ClearSearch
+    | PrepEditList;

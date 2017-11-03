@@ -57,7 +57,7 @@ export class ListEffects {
         .withLatestFrom(this.store)
         .concatMap(([action, state]) => {
             const actions = new Set();
-            const list = action['payload'];
+            const list = action['payload'].list;
             const movies = [];
             const poster = [];
             let averageRating = 0;
@@ -73,9 +73,13 @@ export class ListEffects {
                 movies: movies,
                 poster: poster,
                 averageRating: (averageRating / movies.length).toFixed(2),
-                numberOfMovies: movies.length
+                numberOfMovies: movies.length,
+                editing: action['payload'].editing,
+                changedName: action['payload'].changedName
             };
             actions.add(new ListActions.CreateListSuccess(newList));
+            actions.add(new ListActions.SelectList(newList.name));
+
             return Array.from(actions);
         });
 }

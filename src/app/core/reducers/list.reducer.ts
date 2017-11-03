@@ -47,7 +47,16 @@ export function handleCreateListSuccess(state, action) {
     numberOfMovies: action.payload.numberOfMovies,
     averageRating: action.payload.averageRating
   };
+
+  if (action.payload.editing) {
+    delete newStoreState.lists[action.payload.changedName];
+  }
+
+  if (newStoreState.selectedList.name === list.name) {
+    newStoreState.selectedList = list;
+  }
   newStoreState.lists[list.name] = list;
+
   return newStoreState;
 }
 

@@ -6,4 +6,6 @@ export interface List {
     numberOfMovies: number;
     movies?: Movie[];
     poster?: string[];
+    editing?: boolean;
+    changedName?: string;
 }

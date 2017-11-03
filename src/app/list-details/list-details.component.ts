@@ -5,6 +5,9 @@ import { Observable } from 'rxjs/Observable';
 import { List } from '../core/models/list';
 import { Router } from '@angular/router';
 import * as ListActions from '../core/actions/list.actions';
+import { MatDialogRef, MatDialog } from '@angular/material';
+import { NewListComponent } from '../dialogs/new-list/new-list.component';
+import { DialogService } from '../services/dialog/dialog.service';
 
 @Component({
   selector: 'app-list-details',
@@ -14,10 +17,13 @@ import * as ListActions from '../core/actions/list.actions';
 export class ListDetailsComponent implements OnInit {
   public selectedList: List;
   public selectedMovie;
+  public editListDialogReference: MatDialogRef<NewListComponent>;
 
   constructor(
     private store: Store<fromRoot.State>,
-    private router: Router
+    private router: Router,
+    public dialogService: DialogService,
+    public matDialog: MatDialog,
   ) {
 
   }
@@ -45,6 +51,16 @@ export class ListDetailsComponent implements OnInit {
   }
 
   openAddMovieDialog() {
+    const config = this.dialogService.config;
+    config.data = {
+      editing: true,
+      listName: this.selectedList.name,
+      movies: this.selectedList.movies
+    };
 
+    this.editListDialogReference = this.matDialog.open(NewListComponent, config);
+    this.editListDialogReference.afterClosed().subscribe(response => {
+
+    });
   }
 }
