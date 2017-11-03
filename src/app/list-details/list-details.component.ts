@@ -20,7 +20,7 @@ import * as SearchActions from '../core/actions/search.action';
 export class ListDetailsComponent implements OnInit {
   public selectedMovie;
   public editListDialogReference: MatDialogRef<NewListComponent>;
-
+  public filterTerm: string = '';
   private sort = {
     selected: 'abc',
     // For direction
@@ -29,6 +29,15 @@ export class ListDetailsComponent implements OnInit {
   };
 
   public selectedList: List;
+  private _filteredMovies: Movie[];
+
+  get filteredMovies() {
+    if (this.filterTerm.length) {
+      return _.filter(this.selectedList.movies, movie => new RegExp(this.filterTerm.toLocaleLowerCase()).test(movie.Title.toLocaleLowerCase()));
+    } else {
+      return this.selectedList.movies;
+    }
+  }
 
   constructor(
     private store: Store<fromRoot.State>,
