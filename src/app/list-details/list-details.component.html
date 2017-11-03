@@ -7,19 +7,20 @@
       Average Movie Rating: {{ selectedList?.averageRating}}/100
     </h2>
 
+    <div *ngIf="!selectedMovie">
+      <mat-form-field floatPlaceholder="never">
+        <input matInput [(ngModel)]="filterTerm" placeholder="Search">
+        <mat-icon>search</mat-icon>
+      </mat-form-field>
 
-    <mat-form-field floatPlaceholder="never">
-      <input matInput [(ngModel)]="filterTerm" placeholder="Search">
-      <mat-icon>search</mat-icon>
-    </mat-form-field>
+      <button mat-raised-button [matMenuTriggerFor]="sortMenu">
+          Sort <mat-icon>sort</mat-icon>
+      </button>
 
-    <button mat-raised-button [matMenuTriggerFor]="sortMenu">
-        Sort <mat-icon>sort</mat-icon>
-    </button>
-
-    <button mat-raised-button matTooltip="Add or remove a movie. Change the title" (click)="openAddMovieDialog()">
-        Edit List <mat-icon>local_movies</mat-icon>
-    </button>
+      <button mat-raised-button matTooltip="Add or remove a movie. Change the title" (click)="openAddMovieDialog()">
+          Edit List <mat-icon>local_movies</mat-icon>
+      </button>
+    </div>
 
 </mat-toolbar>
 
@@ -42,6 +43,19 @@
           <mat-icon matTooltip="Delete">delete_forever</mat-icon>
         </button>
 
+      </mat-card-actions>
+
+    </mat-card>
+
+    <mat-card (click)="openAddMovieDialog()" class="addNewListCard" *ngIf="!selectedList?.movies.length">
+      <mat-card-title>Add a Movie</mat-card-title>
+
+      <img mat-card-img src="../../assets/img/posterTemplate.jpg" mdTooltip="Create a new list">
+
+      <mat-card-actions align="end">
+        <button mat-icon-button color="primary">
+          <mat-icon matTooltip="Create a new list">add_circle_outline</mat-icon>
+        </button>
       </mat-card-actions>
 
     </mat-card>

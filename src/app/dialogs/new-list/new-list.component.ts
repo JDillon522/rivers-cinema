@@ -90,7 +90,7 @@ export class NewListComponent implements OnInit {
       movies: this.selectedMovies
     };
 
-    this.store.dispatch(new ListActions.CreateList({list: list, editing: this.editing, changedName: this.data.listName}));
+    this.store.dispatch(new ListActions.CreateList({list: list, editing: this.editing, changedName: _.get(this.data, 'listName')}));
     this.loading = true;
     this.dialogRef.close();
   }
