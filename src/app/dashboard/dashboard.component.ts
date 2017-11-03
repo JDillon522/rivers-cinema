@@ -8,8 +8,6 @@ import * as fromRoot from '../core/application-state';
 import * as ListActions from '../core/actions/list.actions';
 import { Store } from '@ngrx/store';
 
-
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -38,6 +36,6 @@ export class DashboardComponent implements OnInit {
   }
 
   navToListDetails(list: List) {
-    this.store.dispatch(new ListActions.GoToList(list.name));
+    this.store.dispatch(new ListActions.SelectList(list.name));
   }
 }

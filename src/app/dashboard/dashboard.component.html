@@ -5,19 +5,19 @@
     <div class="imgContainer" (click)="navToListDetails(list)">
         <img
         [src]="list?.poster[0]"
-        [matTooltip]="list.movies[0].Title"
+        [matTooltip]="list.movies[0]?.Title"
         class="nestedRouterLink">
       <img
         [src]="list?.poster[1]"
-        [matTooltip]="list.movies[1].Title"
+        [matTooltip]="list.movies[1]?.Title"
         class="nestedRouterLink">
       <img
         [src]="list?.poster[2]"
-        [matTooltip]="list.movies[2].Title"
+        [matTooltip]="list.movies[2]?.Title"
         class="nestedRouterLink">
       <img
         [src]="list?.poster[3]"
-        [matTooltip]="list.movies[3].Title"
+        [matTooltip]="list.movies[3]?.Title"
         class="nestedRouterLink">
     </div>
 

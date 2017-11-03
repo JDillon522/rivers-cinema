@@ -3,17 +3,20 @@ import * as listActions from '../actions/list.actions';
 import { List } from '../models/list';
 import { CREATE_LIST } from '../actions/list.actions';
 import { dummyList } from '../mock-data';
+import { Movie } from '../models/movie';
 
 export interface State {
   lists: { [key: string]: List };
   selectedList: List | null;
+  selectedMovie: Movie | null;
 }
 
 const initialState: State = {
   lists: {
     'dummy-list': dummyList
   },
-  selectedList: null
+  selectedList: dummyList,
+  selectedMovie: null
 };
 
 export function reducer(state = initialState, action: listActions.Actions): State {
@@ -21,8 +24,8 @@ export function reducer(state = initialState, action: listActions.Actions): Stat
     case listActions.CREATE_LIST:
       return handleCreateList(state, action);
 
-    case listActions.SELECT_LIST:
-      return handleSelectList(state, action);
+    case listActions.SELECT_LIST_SUCCESS:
+      return handleSelectListSuccess(state, action);
 
     default:
       return state;
@@ -40,9 +43,15 @@ export function handleCreateList(state, action) {
   return newStoreState;
 }
 
-export function handleSelectList(state, action) {
+export function handleSelectListSuccess(state, action) {
   const newStoreState: State = _.cloneDeep(state);
   newStoreState.selectedList = newStoreState.lists[action.payload];
+  return newStoreState;
+}
+
+export function handleSelectMovieSuccess(state, action) {
+  const newStoreState: State = _.cloneDeep(state);
+  newStoreState.selectedMovie = action.payload;
   return newStoreState;
 }
 

@@ -1,4 +1,9 @@
-.cardContainer {
+.detailsContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.movieCardContainer {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -12,7 +17,12 @@ mat-card {
         background-color: transparent;
     }
 
+    mat-card-title {
+        cursor: pointer;
+    }
+
     img {
+        cursor: pointer;
         display: block;
         max-width: 230px;
         max-height: 300px;

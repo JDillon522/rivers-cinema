@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { List } from '../core/models/list';
 import { Router } from '@angular/router';
+import * as ListActions from '../core/actions/list.actions';
 
 @Component({
   selector: 'app-list-details',
@@ -17,16 +18,18 @@ export class ListDetailsComponent implements OnInit {
     private store: Store<fromRoot.State>,
     private router: Router
   ) {
+
+  }
+
+  ngOnInit() {
     this.store.select(fromRoot.getSelectedList).subscribe(list => {
       if (list) {
         this.selectedList = list;
-      } else {
-        this.router.navigate(['dashboard']);
       }
     });
   }
 
-  ngOnInit() {
+  navToMovieDetails(movie) {
+    this.store.dispatch(new ListActions.SelectMovie(movie));
   }
-
 }

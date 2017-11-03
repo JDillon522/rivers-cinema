@@ -5,7 +5,9 @@ export const GET_LISTS = '[List] get movie lists';
 export const CREATE_LIST = '[List] create a list';
 export const CREATE_LIST_SUCCESS = '[List] create success';
 export const SELECT_LIST = '[List] Select a list';
-export const GO_TO_LIST = '[List] Navigate to selected list';
+export const SELECT_LIST_SUCCESS = '[List] Select a list successfully';
+export const SELECT_MOVIE = '[List] Select a movie from a list';
+export const SELECT_MOVIE_SUCCESS = '[List] Successfully select a movie from the list';
 
 export class GetLists implements Action {
     readonly type = GET_LISTS;
@@ -26,8 +28,18 @@ export class SelectList implements Action {
     constructor(private payload: string) { }
 }
 
-export class GoToList implements Action {
-    readonly type = GO_TO_LIST;
+export class SelectListSuccess implements Action {
+    readonly type = SELECT_LIST_SUCCESS;
+    constructor(private payload: string) { }
+}
+
+export class SelectMovie implements Action {
+    readonly type = SELECT_MOVIE;
+    constructor(private payload: string) { }
+}
+
+export class SelectMovieSuccess implements Action {
+    readonly type = SELECT_MOVIE_SUCCESS;
     constructor(private payload: string) { }
 }
 
@@ -36,4 +48,6 @@ export type Actions
     | CreateList
     | CreateListSuccess
     | SelectList
-    | GoToList;
+    | SelectListSuccess
+    | SelectMovie
+    | SelectMovieSuccess;
