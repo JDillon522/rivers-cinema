@@ -61,10 +61,11 @@ export class ListEffects {
             const movies = _.map(list.movies, (movie: MovieSearch) => {
                 return state.search.movieData[movie.imdbID];
             });
-
+            const poster = _.map(movies, movie => movie.Poster);
             const newList: List = {
                 name: list.name,
-                movies: movies
+                movies: movies,
+                poster: poster
             };
             actions.add(new ListActions.CreateListSuccess(newList));
             return Array.from(actions);

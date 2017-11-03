@@ -3,6 +3,7 @@
     <mat-card-title class="nestedRouterLink" (click)="navToListDetails(list)">{{list?.name}}</mat-card-title>
     <!-- <mat-card-subtitle>text text text</mat-card-subtitle> -->
     <div class="imgContainer" (click)="navToListDetails(list)">
+      {{ list | log}}
         <img
         [src]="list?.poster[0]"
         [matTooltip]="list.movies[0]?.Title"
