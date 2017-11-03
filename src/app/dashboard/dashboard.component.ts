@@ -7,6 +7,8 @@ import { List } from '../core/models/list';
 import * as fromRoot from '../core/application-state';
 import * as ListActions from '../core/actions/list.actions';
 import { Store } from '@ngrx/store';
+import * as SearchActions from '../core/actions/search.action';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +18,7 @@ import { Store } from '@ngrx/store';
 export class DashboardComponent implements OnInit {
 
   public newListDialogReference: MatDialogRef<NewListComponent>;
+  public editListDialogReference: MatDialogRef<NewListComponent>;
   public movieLists$: Observable<List[]>;
 
   constructor(
@@ -31,11 +34,33 @@ export class DashboardComponent implements OnInit {
   openCreateAMovieListDialog() {
     this.newListDialogReference = this.matDialog.open(NewListComponent, this.dialogService.config);
     this.newListDialogReference.afterClosed().subscribe(response => {
-
+      this.store.dispatch(new SearchActions.ClearSearch());
     });
+  }
+
+  openEditAMovieListDialog(list) {
+    const config = _.clone(this.dialogService.config);
+    config.data = {
+      editing: true,
+      listName: list.name,
+      movies: list.movies
+    };
+
+    this.editListDialogReference = this.matDialog.open(NewListComponent, config);
+    this.editListDialogReference.afterClosed().subscribe(response => {
+      this.store.dispatch(new SearchActions.ClearSearch());
+    });
+  }
+
+  deleteList(list) {
+    this.store.dispatch(new ListActions.DeleteList(list));
   }
 
   navToListDetails(list: List) {
     this.store.dispatch(new ListActions.SelectList(list.name));
+  }
+
+  getMoviePoster(poster): string {
+    return poster !== 'N/A' ? poster : '../../assets/img/posterTemplate.jpg';
   }
 }

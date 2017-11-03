@@ -4,34 +4,34 @@
     <mat-card-subtitle>Average Rating: {{list.averageRating}}  Number of Movies: {{list.numberOfMovies}}</mat-card-subtitle>
     <div class="imgContainer" (click)="navToListDetails(list)">
         <img
-        *ngIf="list?.poster[0]"
-        [src]="list?.poster[0]"
+        *ngIf="list?.poster[0]?.length > 4"
+        [src]="getMoviePoster(list?.poster[0])"
         [matTooltip]="list.movies[0]?.Title"
         class="nestedRouterLink">
       <img
-        *ngIf="list?.poster[1]"
-        [src]="list?.poster[1]"
+        *ngIf="list?.poster[1]?.length > 4"
+        [src]="getMoviePoster(list?.poster[1])"
         [matTooltip]="list.movies[1]?.Title"
         class="nestedRouterLink">
       <img
-        *ngIf="list?.poster[2]"
-        [src]="list?.poster[2]"
+        *ngIf="list?.poster[2]?.length > 4"
+        [src]="getMoviePoster(list?.poster[2])"
         [matTooltip]="list.movies[2]?.Title"
         class="nestedRouterLink">
       <img
-        *ngIf="list?.poster[3]"
-        [src]="list?.poster[3]"
+        *ngIf="list?.poster[3]?.length > 4"
+        [src]="getMoviePoster(list?.poster[3])"
         [matTooltip]="list.movies[3]?.Title"
         class="nestedRouterLink">
     </div>
 
     <mat-card-actions align="end">
 
-      <button mat-icon-button color="primary">
+      <button mat-icon-button color="primary" (click)="openEditAMovieListDialog(list)">
         <mat-icon matTooltip="Edit">edit</mat-icon>
       </button>
 
-      <button mat-icon-button color="warn">
+      <button mat-icon-button color="warn" (click)="deleteList(list)">
         <mat-icon matTooltip="Delete">delete_forever</mat-icon>
       </button>
 

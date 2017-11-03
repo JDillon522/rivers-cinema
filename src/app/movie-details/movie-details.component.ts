@@ -18,7 +18,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   get poster(): string {
-    return _.get(this.movieDetails, 'Poster') !== 'N/A' ? this.movieDetails.Poster : '../../assets/img/posterTemplate.jpg';
+    return _.get(this.movie, 'Poster') !== 'N/A' ? this.movie.Poster : '../../assets/img/posterTemplate.jpg';
   }
 
   set movieDetails(movie) {

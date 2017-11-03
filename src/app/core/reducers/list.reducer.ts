@@ -36,6 +36,9 @@ export function reducer(state = initialState, action: listActions.Actions): Stat
     case listActions.DELETE_MOVIE:
       return handleDeleteMovie(state, action);
 
+    case listActions.DELETE_LIST:
+      return handleDeleteList(state, action);
+
     default:
       return state;
   }
@@ -85,12 +88,19 @@ export function handleDeleteMovie(state, action) {
   const newStoreState: State = _.cloneDeep(state);
   const list = newStoreState.lists[action.payload.list];
   _.remove(list.movies, movie => movie.imdbID === action.payload.id);
+  list.poster = _.map(list.movies, movie => movie.Poster);
 
   if (newStoreState.selectedList.name === list.name) {
     _.remove(newStoreState.selectedList.movies, movie => movie.imdbID === action.payload.id);
   }
 
   newStoreState.lists[list.name] = list;
+  return newStoreState;
+}
+
+export function handleDeleteList(state, action) {
+  const newStoreState: State = _.cloneDeep(state);
+  delete newStoreState.lists[action.payload.name];
   return newStoreState;
 }
 

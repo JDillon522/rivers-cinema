@@ -69,7 +69,7 @@ export class NewListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.data.editing) {
+    if (this.data && this.data.editing) {
       this.editing = true;
       this.listName = this.data.listName;
       this.store.dispatch(new SearchActions.PrepEditList(this.data));
@@ -93,7 +93,6 @@ export class NewListComponent implements OnInit {
     this.store.dispatch(new ListActions.CreateList({list: list, editing: this.editing, changedName: this.data.listName}));
     this.loading = true;
     this.dialogRef.close();
-    this.store.dispatch(new SearchActions.ClearSearch());
   }
 
   movieSelected(event, movie) {

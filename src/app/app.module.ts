@@ -25,8 +25,6 @@ import { LogPipe } from './pipes/log/log.pipe';
 import { ListDetailsComponent } from './list-details/list-details.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MapToIterablePipe } from './pipes/map-to-iterable/map-to-iterable.pipe';
-import { NewMovieComponent } from './dialogs/new-movie/new-movie.component';
-
 
 @NgModule({
   declarations: [
@@ -37,8 +35,7 @@ import { NewMovieComponent } from './dialogs/new-movie/new-movie.component';
     LogPipe,
     ListDetailsComponent,
     MovieDetailsComponent,
-    MapToIterablePipe,
-    NewMovieComponent
+    MapToIterablePipe
   ],
   imports: [
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -74,8 +71,7 @@ import { NewMovieComponent } from './dialogs/new-movie/new-movie.component';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    NewListComponent,
-    NewMovieComponent
+    NewListComponent
   ]
 })
 export class AppModule { }

@@ -10,6 +10,7 @@ import { NewListComponent } from '../dialogs/new-list/new-list.component';
 import { DialogService } from '../services/dialog/dialog.service';
 import { Movie } from '../core/models/movie';
 import * as _ from 'lodash';
+import * as SearchActions from '../core/actions/search.action';
 
 @Component({
   selector: 'app-list-details',
@@ -17,9 +18,32 @@ import * as _ from 'lodash';
   styleUrls: ['./list-details.component.scss']
 })
 export class ListDetailsComponent implements OnInit {
-  public selectedList: List;
   public selectedMovie;
   public editListDialogReference: MatDialogRef<NewListComponent>;
+
+  private sort = {
+    selected: 'abc',
+    // For direction
+    abc: true,
+    rating: true
+  };
+
+  private _selectedList: List;
+
+  get selectedList(): List {
+    const newList = _.cloneDeep(this._selectedList);
+    const sort = this.sort.selected === 'abc' ? 'Title' : 'imdbRating';
+
+    newList.movies = _.sortBy(newList.movies, sort);
+    if (!this.sort[this.sort.selected]) {
+      newList.movies.reverse();
+    }
+    return newList;
+  }
+
+  set selectedList(list) {
+    this._selectedList = list;
+  }
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -57,7 +81,7 @@ export class ListDetailsComponent implements OnInit {
   }
 
   openAddMovieDialog() {
-    const config = this.dialogService.config;
+    const config = _.clone(this.dialogService.config);
     config.data = {
       editing: true,
       listName: this.selectedList.name,
@@ -66,11 +90,16 @@ export class ListDetailsComponent implements OnInit {
 
     this.editListDialogReference = this.matDialog.open(NewListComponent, config);
     this.editListDialogReference.afterClosed().subscribe(response => {
-
+      this.store.dispatch(new SearchActions.ClearSearch());
     });
   }
 
   deleteMovie(movie: Movie) {
     this.store.dispatch(new ListActions.DeleteMovie({id: movie.imdbID, list: this.selectedList.name}));
+  }
+
+  sortBy(sort) {
+    this.sort.selected = sort;
+    this.sort[sort] = !this.sort[sort];
   }
 }
