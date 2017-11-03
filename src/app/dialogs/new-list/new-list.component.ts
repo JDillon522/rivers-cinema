@@ -15,17 +15,14 @@ import { List } from '../../core/models/list';
   styleUrls: ['./new-list.component.scss']
 })
 export class NewListComponent implements OnInit {
-  public searchResults$: Observable<MovieSearch[]>;
   public searchError$: Observable<string>;
-  public movieSelection$: Observable<MovieSearch[]>;
-
   public loading: boolean = false;
-
-  @ViewChild(MatSelectionList) selectedMovies: MatSelectionList;
 
   private _listName: string = '';
   private _searchInput: string = '';
   private _keyedSearch: { [key: string]: Movie | MovieSearch };
+  private _searchResults: MovieSearch[] = [];
+  private _selectedMovies: MovieSearch[] = [];
 
   get searchInput(): string {
     return this._searchInput;
@@ -44,36 +41,56 @@ export class NewListComponent implements OnInit {
     this._listName = _.replace(name, /\s/, '-');
   }
 
+  get searchResults(): MovieSearch[] {
+    return this._searchResults;
+  }
+
+  set searchResults(results) {
+    this._searchResults = results;
+  }
+
+  get selectedMovies(): MovieSearch[] {
+    return this._selectedMovies;
+  }
+
+  set selectedMovies(movies) {
+    this._selectedMovies = movies;
+  }
+
   constructor(
     private store: Store<fromRoot.State>,
     private dialogRef: MatDialogRef<NewListComponent>
   ) { }
 
   ngOnInit() {
-    this.searchResults$ = this.store.select(fromRoot.getSearchRestuls);
+    this.store.select(fromRoot.getSearchRestuls).subscribe(results => {
+      this.searchResults = results;
+    });
     this.searchError$ = this.store.select(fromRoot.getSearchError);
-    this.movieSelection$ = this.store.select(fromRoot.getSelection);
-
-    // this.selectedMovies.selectedOptions.onChange.subscribe(list => {
-    //   if (list.added.length) {
-    //     this.store.dispatch(new SearchActions.AddToSelection(list.added[0].value));
-    //   }
-    //   if (list.removed.length) {
-    //     this.store.dispatch(new SearchActions.RemoveFromSelection(list.removed[0].value));
-    //   }
-    // });
+    this.store.select(fromRoot.getSelection).subscribe(results => {
+      this.selectedMovies = results;
+    });
   }
 
   createList() {
-    const list: List = {
+    const list = {
       name: _.trimEnd(this.listName, '-_'),
-      movies: [] // TBD
+      movies: this.selectedMovies
     };
 
     this.store.dispatch(new ListActions.CreateList(list));
     this.loading = true;
     this.dialogRef.close();
     this.store.dispatch(new SearchActions.ClearSearch());
+  }
+
+  movieSelected(event, movie) {
+      if (event.checked) {
+        this.store.dispatch(new SearchActions.SearchMovie(movie.imdbID));
+        this.store.dispatch(new SearchActions.AddToSelection(movie));
+      } else {
+        this.store.dispatch(new SearchActions.RemoveFromSelection(movie));
+      }
   }
 
 }

@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Rx';
 import * as fromRoot from '../application-state';
 import * as ListActions from '../actions/list.actions';
 import * as _ from 'lodash';
+import { List } from '../models/list';
+import { MovieSearch } from '../models/movie';
 
 @Injectable()
 export class ListEffects {
@@ -50,4 +52,21 @@ export class ListEffects {
             return Array.from(actions);
         });
 
+    @Effect() createList$: Observable<Action> = this.actions$
+        .ofType(ListActions.CREATE_LIST)
+        .withLatestFrom(this.store)
+        .concatMap(([action, state]) => {
+            const actions = new Set();
+            const list = action['payload'];
+            const movies = _.map(list.movies, (movie: MovieSearch) => {
+                return state.search.movieData[movie.imdbID];
+            });
+
+            const newList: List = {
+                name: list.name,
+                movies: movies
+            };
+            actions.add(new ListActions.CreateListSuccess(newList));
+            return Array.from(actions);
+        });
 }

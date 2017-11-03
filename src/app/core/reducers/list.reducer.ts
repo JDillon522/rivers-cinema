@@ -21,8 +21,8 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: listActions.Actions): State {
   switch (action.type) {
-    case listActions.CREATE_LIST:
-      return handleCreateList(state, action);
+    case listActions.CREATE_LIST_SUCCESS:
+      return handleCreateListSuccess(state, action);
 
     case listActions.SELECT_LIST_SUCCESS:
       return handleSelectListSuccess(state, action);
@@ -38,7 +38,7 @@ export function reducer(state = initialState, action: listActions.Actions): Stat
   }
 }
 
-export function handleCreateList(state, action) {
+export function handleCreateListSuccess(state, action) {
   const newStoreState = _.cloneDeep(state);
   const list: List = {
     name: action.payload.name,

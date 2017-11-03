@@ -5,7 +5,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   MatCardModule, MatToolbarModule, MatMenuModule, MatIconModule, MatButtonModule, MatDialogModule, MatGridListModule,
-  MatTooltipModule, MatFormFieldModule, MatInputModule, MatListModule, MatExpansionModule, MatProgressSpinnerModule
+  MatTooltipModule, MatFormFieldModule, MatInputModule, MatListModule, MatExpansionModule, MatProgressSpinnerModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { AppComponent } from './app.component';
 import { FourOFourComponent } from './four-o-four/four-o-four.component';
@@ -24,6 +25,7 @@ import { LogPipe } from './pipes/log/log.pipe';
 import { ListDetailsComponent } from './list-details/list-details.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { MapToIterablePipe } from './pipes/map-to-iterable/map-to-iterable.pipe';
+import { NewMovieComponent } from './dialogs/new-movie/new-movie.component';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { MapToIterablePipe } from './pipes/map-to-iterable/map-to-iterable.pipe'
     LogPipe,
     ListDetailsComponent,
     MovieDetailsComponent,
-    MapToIterablePipe
+    MapToIterablePipe,
+    NewMovieComponent
   ],
   imports: [
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -61,7 +64,8 @@ import { MapToIterablePipe } from './pipes/map-to-iterable/map-to-iterable.pipe'
     MatInputModule,
     MatListModule,
     MatExpansionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCheckboxModule
   ],
   providers: [
     DialogService,
@@ -70,7 +74,8 @@ import { MapToIterablePipe } from './pipes/map-to-iterable/map-to-iterable.pipe'
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    NewListComponent
+    NewListComponent,
+    NewMovieComponent
   ]
 })
 export class AppModule { }

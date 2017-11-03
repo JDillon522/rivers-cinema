@@ -16,7 +16,7 @@ export class GetLists implements Action {
 
 export class CreateList implements Action {
     readonly type = CREATE_LIST;
-    constructor(private payload: List) { }
+    constructor(private payload) { }
 }
 
 export class CreateListSuccess implements Action {

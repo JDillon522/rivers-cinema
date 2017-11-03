@@ -33,9 +33,8 @@ export class SearchEffects {
 
     @Effect() searchMovie$: Observable<Action> = this.actions$
         .ofType(SearchActions.SEARCH_MOVIE)
-        .debounceTime(100)
         .concatMap(action => {
-            return this.searchService.getMovieData(action['payload']['imdbID'])
+            return this.searchService.getMovieData(action['payload'])
                 .mergeMap(response => {
                     const actions = new Set();
                     actions.add(new SearchActions.SearchMovieSuccess(response));

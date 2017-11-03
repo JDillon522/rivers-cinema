@@ -7,22 +7,32 @@
 		<mat-form-field>
 			<input matInput placeholder="List Name" [(ngModel)]="listName">
 		</mat-form-field>
-		<!-- <mat-form-field >
+		<mat-form-field >
 			<input matInput placeholder="Search for Movies" [(ngModel)]="searchInput">
-		</mat-form-field> -->
+		</mat-form-field>
 	</div>
 
-	<!-- <mat-selection-list #selectedMovies>
-		<mat-list-option *ngFor="let movie of ( searchResults$ | async)" [value]="movie">
-			{{movie?.Title}} - {{movie?.Year}}
-		</mat-list-option>
-	</mat-selection-list>
+	<mat-list class="searchList">
+		<h3 mat-subheader>Search Results</h3>
+		<mat-divider></mat-divider>
+		<mat-list-item *ngFor="let movie of searchResults">
+			<mat-checkbox [value]="movie" (change)="movieSelected($event, movie)">{{movie?.Title}} - {{movie?.Year}} </mat-checkbox>
+		</mat-list-item>
+	</mat-list>
 
 	<mat-list *ngIf="(searchError$ | async)">
 		<mat-list-item>
 				{{(searchError$ | async)}}
 		</mat-list-item>
-	</mat-list> -->
+	</mat-list>
+
+	<mat-list class="selectedList">
+		<h3 mat-subheader>Selected Movies</h3>
+		<mat-divider></mat-divider>
+		<mat-list-item *ngFor="let movie of selectedMovies">
+			<mat-checkbox checked="true" [value]="movie" (change)="movieSelected($event, movie)">{{movie?.Title}} - {{movie?.Year}} </mat-checkbox>
+		</mat-list-item>
+	</mat-list>
 
 </mat-dialog-content>
 

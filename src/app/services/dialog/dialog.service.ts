@@ -7,7 +7,9 @@ export class DialogService {
   constructor() { }
 
   public config: MatDialogConfig = {
-    panelClass: ['rc-dialog']
+    panelClass: ['rc-dialog'],
+    width: '500px',
+    height: '600px'
   };
 
 }

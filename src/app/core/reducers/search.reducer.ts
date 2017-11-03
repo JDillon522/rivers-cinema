@@ -1,18 +1,20 @@
 import * as searchActions from '../actions/search.action';
 import * as _ from 'lodash';
 import { Search } from '../models/search';
-import { MovieSearch } from '../models/movie';
+import { MovieSearch, Movie } from '../models/movie';
 
 export interface State {
   movies: { [key: string]:  MovieSearch };
   selection: { [key: string]:  MovieSearch };
   error: string;
+  movieData: { [key: string]:  Movie }
 }
 
 const initialState: State = {
   movies: {},
   selection: {},
-  error: ''
+  error: '',
+  movieData: {}
 };
 
 export function reducer(state = initialState, action: searchActions.Actions): State {
@@ -44,10 +46,10 @@ export function handleSearchResults(state, action) {
 
   if (res.Response === 'True') {
     const movies = _.keyBy(_.take(res.Search, 4), 'imdbID');
-    newStoreState.movies = _.merge(movies, newStoreState.selection);
+    newStoreState.movies = movies;
     newStoreState.error = '';
   } else {
-    newStoreState.movies = newStoreState.selection;
+    newStoreState.movies = {};
     newStoreState.error = res.Error;
   }
   return newStoreState;
@@ -55,20 +57,20 @@ export function handleSearchResults(state, action) {
 
 export function handleSearchMovieSuccess(state, action) {
   const newStoreState: State = _.cloneDeep(state);
-  // newStoreState.movies[action.payload.imdbID].movieData = action.payload;
+  newStoreState.movieData[action.payload.imdbID] = action.payload;
   return newStoreState;
 }
 
 export function handleAddMovieToSelection(state, action) {
   const newStoreState: State = _.cloneDeep(state);
   newStoreState.selection[action.payload.imdbID] = action.payload;
-  // newStoreState.selection[action.payload.imdbID].selected = true;
-  // newStoreState.movies[action.payload.imdbID].selected = true;
+  delete newStoreState.movies[action.payload.imdbID];
   return newStoreState;
 }
 
 export function handleRemoveMovieFromSelection(state, action) {
   const newStoreState: State = _.cloneDeep(state);
+  newStoreState.movies[action.payload.imdbID] = action.payload;
   delete newStoreState.selection[action.payload.imdbID];
   return newStoreState;
 }

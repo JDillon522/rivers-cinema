@@ -6,8 +6,11 @@ body {
 }
 
 .rc-dialog {
-    min-width: 500px;
-    min-height: 600px;
+    // width: 500px;
+    // height: 600px;
+    mat-dialog-content {
+        height: 86%;
+    }
 }
 
 .form-row > * {

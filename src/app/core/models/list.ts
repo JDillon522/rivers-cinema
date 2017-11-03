@@ -1,7 +1,7 @@
-import { Movie } from './movie';
+import { Movie, MovieSearch } from './movie';
 
 export interface List {
     name: string;
-    movies: Movie[];
+    movies?: Movie[];
     poster?: string[];
 }

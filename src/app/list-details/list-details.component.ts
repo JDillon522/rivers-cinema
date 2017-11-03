@@ -43,4 +43,8 @@ export class ListDetailsComponent implements OnInit {
   clearSelectedMovie() {
     this.store.dispatch(new ListActions.DisselectMovie());
   }
+
+  openAddMovieDialog() {
+
+  }
 }
