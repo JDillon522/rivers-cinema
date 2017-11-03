@@ -8,6 +8,8 @@ import * as ListActions from '../core/actions/list.actions';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { NewListComponent } from '../dialogs/new-list/new-list.component';
 import { DialogService } from '../services/dialog/dialog.service';
+import { Movie } from '../core/models/movie';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-list-details',
@@ -42,6 +44,10 @@ export class ListDetailsComponent implements OnInit {
     });
   }
 
+  getMoviePoster(poster): string {
+    return poster !== 'N/A' ? poster : '../../assets/img/posterTemplate.jpg';
+  }
+
   navToMovieDetails(movie) {
     this.store.dispatch(new ListActions.SelectMovie(movie));
   }
@@ -62,5 +68,9 @@ export class ListDetailsComponent implements OnInit {
     this.editListDialogReference.afterClosed().subscribe(response => {
 
     });
+  }
+
+  deleteMovie(movie: Movie) {
+    this.store.dispatch(new ListActions.DeleteMovie({id: movie.imdbID, list: this.selectedList.name}));
   }
 }

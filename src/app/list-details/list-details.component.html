@@ -16,13 +16,13 @@
       <img
         (click)="navToMovieDetails(movie)"
         mat-card-image
-        [src]="movie.Poster"
+        [src]="getMoviePoster(movie.Poster)"
         matTooltip="Click for Details"
         class="nestedRouterLink">
 
       <mat-card-actions align="end">
 
-        <button mat-icon-button color="warn">
+        <button mat-icon-button color="warn" (click)="deleteMovie(movie)">
           <mat-icon matTooltip="Delete">delete_forever</mat-icon>
         </button>
 

@@ -11,8 +11,9 @@
     </mat-list>
 
     <img
+      *ngIf="poster"
       mat-card-image
-      [src]="movie?.Poster"
+      [src]="poster"
       [matTooltip]="movie?.Title"
       class="moviePoster">
 

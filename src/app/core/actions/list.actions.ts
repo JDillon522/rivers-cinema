@@ -9,6 +9,7 @@ export const SELECT_LIST_SUCCESS = '[List] Select a list successfully';
 export const SELECT_MOVIE = '[List] Select a movie from a list';
 export const SELECT_MOVIE_SUCCESS = '[List] Successfully select a movie from the list';
 export const DISSELECT_MOVIE = '[List] Remove the selected movie from the store';
+export const DELETE_MOVIE = '[List] Delete a movie from the list';
 
 export class GetLists implements Action {
     readonly type = GET_LISTS;
@@ -48,6 +49,11 @@ export class DisselectMovie implements Action {
     readonly type = DISSELECT_MOVIE;
 }
 
+export class DeleteMovie implements Action {
+    readonly type = DELETE_MOVIE;
+    constructor(private payload: {id: string, list: string}) { }
+}
+
 export type Actions
     = GetLists
     | CreateList
@@ -56,4 +62,5 @@ export type Actions
     | SelectListSuccess
     | SelectMovie
     | SelectMovieSuccess
-    | DisselectMovie;
+    | DisselectMovie
+    | DeleteMovie;

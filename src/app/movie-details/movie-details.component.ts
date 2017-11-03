@@ -17,6 +17,10 @@ export class MovieDetailsComponent implements OnInit {
     return this._movieDetails;
   }
 
+  get poster(): string {
+    return _.get(this.movieDetails, 'Poster') !== 'N/A' ? this.movieDetails.Poster : '../../assets/img/posterTemplate.jpg';
+  }
+
   set movieDetails(movie) {
     if (movie) {
       const newMovie = _.clone(movie);
