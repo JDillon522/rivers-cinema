@@ -1,7 +1,7 @@
 <div class="cardContainer">
   <mat-card  color="primary" *ngFor="let list of ( movieLists$ | async )">
     <mat-card-title class="nestedRouterLink" (click)="navToListDetails(list)">{{list?.name}}</mat-card-title>
-    <mat-card-subtitle>Average Rating: {{list.averageRating}}  Number of Movies: {{list.numberOfMovies}}</mat-card-subtitle>
+    <mat-card-subtitle>Average Rating: {{list.averageRating}}/100  Number of Movies: {{list.numberOfMovies}}</mat-card-subtitle>
     <div class="imgContainer" (click)="navToListDetails(list)">
         <img
         *ngIf="list?.poster[0]?.length > 4"

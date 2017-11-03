@@ -28,22 +28,7 @@ export class ListDetailsComponent implements OnInit {
     rating: true
   };
 
-  private _selectedList: List;
-
-  get selectedList(): List {
-    const newList = _.cloneDeep(this._selectedList);
-    const sort = this.sort.selected === 'abc' ? 'Title' : 'imdbRating';
-
-    newList.movies = _.sortBy(newList.movies, sort);
-    if (!this.sort[this.sort.selected]) {
-      newList.movies.reverse();
-    }
-    return newList;
-  }
-
-  set selectedList(list) {
-    this._selectedList = list;
-  }
+  public selectedList: List;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -101,5 +86,15 @@ export class ListDetailsComponent implements OnInit {
   sortBy(sort) {
     this.sort.selected = sort;
     this.sort[sort] = !this.sort[sort];
+
+    const newList = _.cloneDeep(this.selectedList);
+    const sortTerm = this.sort.selected === 'abc' ? 'Title' : 'imdbRating';
+
+    newList.movies = _.sortBy(newList.movies, sort);
+    if (!this.sort[this.sort.selected]) {
+      newList.movies.reverse();
+    }
+
+    this.selectedList = newList;
   }
 }

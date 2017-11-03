@@ -1,12 +1,14 @@
 <mat-toolbar color="accent">
-    <h2 class="header"><a [routerLink]="['/list', selectedList?.name, 'details']" (click)="clearSelectedMovie()"><b>List: {{ selectedList?.name | uppercase }}</b></a></h2>
+    <h2 class="header">
+      <a [routerLink]="['/list', selectedList?.name, 'details']" (click)="clearSelectedMovie()">
+        <b>List: {{ selectedList?.name | uppercase }}</b>
+      </a>
 
-    <mat-menu #sortMenu="matMenu">
-      <button mat-menu-item (click)="sortBy('abc')">
-        Alphebetical
-      </button>
-      <button mat-menu-item (click)="sortBy('rate')">Highest Rating</button>
-    </mat-menu>
+      Average Movie Rating: {{ selectedList?.averageRating}}/100
+    </h2>
+
+
+
 
     <button mat-raised-button [matMenuTriggerFor]="sortMenu">
         Sort <mat-icon>sort</mat-icon>
@@ -45,3 +47,10 @@
   <router-outlet></router-outlet>
 
 </div>
+
+<mat-menu #sortMenu="matMenu">
+  <button mat-menu-item (click)="sortBy('abc')">
+    Alphebetical
+  </button>
+  <button mat-menu-item (click)="sortBy('rate')">Highest Rating</button>
+</mat-menu>
