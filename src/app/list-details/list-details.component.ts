@@ -13,6 +13,7 @@ import * as ListActions from '../core/actions/list.actions';
 })
 export class ListDetailsComponent implements OnInit {
   public selectedList: List;
+  public selectedMovie;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -22,14 +23,24 @@ export class ListDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.store.dispatch(new ListActions.DisselectMovie());
+
     this.store.select(fromRoot.getSelectedList).subscribe(list => {
       if (list) {
         this.selectedList = list;
       }
     });
+
+    this.store.select(fromRoot.getSelectedMovie).subscribe(movie => {
+      this.selectedMovie = movie ? true : false;
+    });
   }
 
   navToMovieDetails(movie) {
     this.store.dispatch(new ListActions.SelectMovie(movie));
+  }
+
+  clearSelectedMovie() {
+    this.store.dispatch(new ListActions.DisselectMovie());
   }
 }

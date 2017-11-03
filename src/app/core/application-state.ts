@@ -25,3 +25,5 @@ export const getSelection = createSelector(getSearchState, fromSearch.getSelecti
 export const getListState = (state: State) => state.lists;
 export const getMovieLists = createSelector(getListState, fromList.getMovieLists);
 export const getSelectedList = createSelector(getListState, fromList.getSelectedList);
+export const getSelectedMovie = createSelector(getListState, fromList.getSelectedMovie);
+

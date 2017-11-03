@@ -27,6 +27,12 @@ export function reducer(state = initialState, action: listActions.Actions): Stat
     case listActions.SELECT_LIST_SUCCESS:
       return handleSelectListSuccess(state, action);
 
+    case listActions.SELECT_MOVIE_SUCCESS:
+      return handleSelectMovieSuccess(state, action);
+
+    case listActions.DISSELECT_MOVIE:
+      return handleDisselectMovie(state, action);
+
     default:
       return state;
   }
@@ -55,5 +61,12 @@ export function handleSelectMovieSuccess(state, action) {
   return newStoreState;
 }
 
+export function handleDisselectMovie(state, action) {
+  const newStoreState: State = _.cloneDeep(state);
+  newStoreState.selectedMovie = null;
+  return newStoreState;
+}
+
 export const getMovieLists = (state: State) => _.values(state.lists);
 export const getSelectedList = (state: State) => state.selectedList;
+export const getSelectedMovie = (state: State) => state.selectedMovie;

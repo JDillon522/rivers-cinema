@@ -1,5 +1,5 @@
 <mat-toolbar color="accent">
-    <h2>{{ selectedList?.name }}</h2>
+    <h2 class="header"><a [routerLink]="['/list', selectedList?.name, 'details']" (click)="clearSelectedMovie()"><b>List: {{ selectedList?.name | uppercase }}</b></a></h2>
 
     <button mat-raised-button>
         Add A Movie <mat-icon>local_movies</mat-icon>
@@ -8,7 +8,7 @@
 </mat-toolbar>
 
 <div class="detailsContainer">
-  <div class="movieCardContainer">
+  <div class="movieCardContainer" *ngIf="!selectedMovie">
     <mat-card  color="primary" *ngFor="let movie of selectedList?.movies">
       <mat-card-title class="nestedRouterLink" (click)="navToMovieDetails(movie)">{{movie.Title}}</mat-card-title>
       <mat-card-subtitle>{{movie.Rated}}, {{movie.Year}}, {{movie.Genre}}</mat-card-subtitle>
@@ -32,4 +32,5 @@
   </div>
 
   <router-outlet></router-outlet>
+
 </div>

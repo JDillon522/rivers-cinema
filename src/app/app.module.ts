@@ -23,6 +23,7 @@ import { ServiceInterceptor } from './services/service.interceptor';
 import { LogPipe } from './pipes/log/log.pipe';
 import { ListDetailsComponent } from './list-details/list-details.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { MapToIterablePipe } from './pipes/map-to-iterable/map-to-iterable.pipe';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
     NewListComponent,
     LogPipe,
     ListDetailsComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    MapToIterablePipe
   ],
   imports: [
     StoreModule.forRoot(reducers, { metaReducers }),
