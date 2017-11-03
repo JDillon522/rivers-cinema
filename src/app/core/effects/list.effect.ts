@@ -58,14 +58,22 @@ export class ListEffects {
         .concatMap(([action, state]) => {
             const actions = new Set();
             const list = action['payload'];
-            const movies = _.map(list.movies, (movie: MovieSearch) => {
-                return state.search.movieData[movie.imdbID];
+            const movies = [];
+            const poster = [];
+            let averageRating = 0;
+
+            _.forEach(list.movies, (movie: MovieSearch) => {
+                movies.push(state.search.movieData[movie.imdbID]);
+                poster.push(state.search.movieData[movie.imdbID].Poster);
+                averageRating += parseFloat(state.search.movieData[movie.imdbID].imdbRating);
             });
-            const poster = _.map(movies, movie => movie.Poster);
+
             const newList: List = {
                 name: list.name,
                 movies: movies,
-                poster: poster
+                poster: poster,
+                averageRating: (averageRating / movies.length).toFixed(2),
+                numberOfMovies: movies.length
             };
             actions.add(new ListActions.CreateListSuccess(newList));
             return Array.from(actions);

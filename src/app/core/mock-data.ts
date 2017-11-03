@@ -2,6 +2,8 @@ import { List } from './models/list';
 
 export const dummyList: List = {
     name: 'dummy-list',
+    averageRating: '95',
+    numberOfMovies: 5,
     movies: [
         {
             'Title': 'Guardians',
@@ -177,4 +179,4 @@ export const dummyList: List = {
     poster: [
         'https://images-na.ssl-images-amazon.com/images/M/MV5BMTgwOTg0NTA0Nl5BMl5BanBnXkFtZTcwNTg3NTY3MQ@@._V1_SX300.jpg', 'https://images-na.ssl-images-amazon.com/images/M/MV5BODg4NzA0MTktOGU5ZS00ODlkLWE3ZmQtYjAzNjNmM2E3NmEzL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg', 'https://images-na.ssl-images-amazon.com/images/M/MV5BZmRmNDc5NTUtZjRhYi00NmU5LWJlNDgtZTJmZmM4YWUzNTFkXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg', 'https://images-na.ssl-images-amazon.com/images/M/MV5BY2IzZGY2YmEtYzljNS00NTM5LTgwMzUtMzM1NjQ4NGI0OTk0XkEyXkFqcGdeQXVyNDYyMDk5MTU@._V1_SX300.jpg', 'https://images-na.ssl-images-amazon.com/images/M/MV5BYzljMGRkMGEtMzEwMy00MTM1LWJkMWYtZjBhYjEyOGFhODJmXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg'
     ]
-}
+};

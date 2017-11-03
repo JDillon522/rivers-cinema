@@ -1,22 +1,25 @@
 <div class="cardContainer">
   <mat-card  color="primary" *ngFor="let list of ( movieLists$ | async )">
     <mat-card-title class="nestedRouterLink" (click)="navToListDetails(list)">{{list?.name}}</mat-card-title>
-    <!-- <mat-card-subtitle>text text text</mat-card-subtitle> -->
+    <mat-card-subtitle>Average Rating: {{list.averageRating}}  Number of Movies: {{list.numberOfMovies}}</mat-card-subtitle>
     <div class="imgContainer" (click)="navToListDetails(list)">
-      {{ list | log}}
         <img
+        *ngIf="list?.poster[0]"
         [src]="list?.poster[0]"
         [matTooltip]="list.movies[0]?.Title"
         class="nestedRouterLink">
       <img
+        *ngIf="list?.poster[1]"
         [src]="list?.poster[1]"
         [matTooltip]="list.movies[1]?.Title"
         class="nestedRouterLink">
       <img
+        *ngIf="list?.poster[2]"
         [src]="list?.poster[2]"
         [matTooltip]="list.movies[2]?.Title"
         class="nestedRouterLink">
       <img
+        *ngIf="list?.poster[3]"
         [src]="list?.poster[3]"
         [matTooltip]="list.movies[3]?.Title"
         class="nestedRouterLink">

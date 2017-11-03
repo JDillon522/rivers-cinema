@@ -43,7 +43,9 @@ export function handleCreateListSuccess(state, action) {
   const list: List = {
     name: action.payload.name,
     movies: action.payload.movies || {},
-    poster: action.payload.poster || '../../assets/img/posterTemplate.jpg'
+    poster: action.payload.poster || '../../assets/img/posterTemplate.jpg',
+    numberOfMovies: action.payload.numberOfMovies,
+    averageRating: action.payload.averageRating
   };
   newStoreState.lists[list.name] = list;
   return newStoreState;
