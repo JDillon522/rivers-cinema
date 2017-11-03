@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import * as listActions from '../actions/list.actions';
 import { List } from '../models/list';
 import { CREATE_LIST } from '../actions/list.actions';
+import { dummyList } from '../mock-data';
 
 export interface State {
   lists: { [key: string]: List };
@@ -9,7 +10,9 @@ export interface State {
 }
 
 const initialState: State = {
-  lists: { },
+  lists: {
+    'dummy-list': dummyList
+  },
   selectedList: null
 };
 
@@ -44,3 +47,4 @@ export function handleSelectList(state, action) {
 }
 
 export const getMovieLists = (state: State) => _.values(state.lists);
+export const getSelectedList = (state: State) => state.selectedList;

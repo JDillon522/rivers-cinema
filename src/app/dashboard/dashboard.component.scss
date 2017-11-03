@@ -4,6 +4,19 @@
     flex-wrap: wrap;
 }
 
+.imgContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    img {
+        margin: 0;
+        padding: 0;
+        width: 50%;
+        height: 50%;
+    }
+}
+
 .addNewListCard {
     cursor: pointer;
 }

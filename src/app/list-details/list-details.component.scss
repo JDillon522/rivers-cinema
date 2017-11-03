@@ -1,0 +1,23 @@
+.cardContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+mat-card {
+    width: 300px;
+    margin: 0.5em auto;
+
+    &:hover {
+        background-color: transparent;
+    }
+
+    img {
+        display: block;
+        max-width: 230px;
+        max-height: 300px;
+        width: auto;
+        height: auto;
+        margin: auto;
+    }
+}

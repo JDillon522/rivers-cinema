@@ -2,13 +2,24 @@
   <mat-card  color="primary" *ngFor="let list of ( movieLists$ | async )">
     <mat-card-title class="nestedRouterLink" (click)="navToListDetails(list)">{{list?.name}}</mat-card-title>
     <!-- <mat-card-subtitle>text text text</mat-card-subtitle> -->
-
-    <img
-      mat-card-img
-      [src]="list?.poster"
-      mdTooltip="Create a new list"
-      (click)="navToListDetails(list)"
-      class="nestedRouterLink">
+    <div class="imgContainer" (click)="navToListDetails(list)">
+        <img
+        [src]="list?.poster[0]"
+        [matTooltip]="list.movies[0].Title"
+        class="nestedRouterLink">
+      <img
+        [src]="list?.poster[1]"
+        [matTooltip]="list.movies[1].Title"
+        class="nestedRouterLink">
+      <img
+        [src]="list?.poster[2]"
+        [matTooltip]="list.movies[2].Title"
+        class="nestedRouterLink">
+      <img
+        [src]="list?.poster[3]"
+        [matTooltip]="list.movies[3].Title"
+        class="nestedRouterLink">
+    </div>
 
     <mat-card-actions align="end">
 
@@ -24,7 +35,7 @@
 
   </mat-card>
 
-  <mat-card (click)="openCreateAMovieListDialog()" class="addNewListCard">
+  <mat-card (click)="openCreateAMovieListDialog()" class="addNewListCard" *ngIf="!( movieLists$ | async )?.length">
     <mat-card-title>Create A New Movie List</mat-card-title>
 
     <img mat-card-img src="../../assets/img/posterTemplate.jpg" mdTooltip="Create a new list">

@@ -20,10 +20,10 @@ export class NewListComponent implements OnInit {
   public movieSelection$: Observable<MovieSearch[]>;
 
   public loading: boolean = false;
-  public listName: string;
 
   @ViewChild(MatSelectionList) selectedMovies: MatSelectionList;
 
+  private _listName: string = '';
   private _searchInput: string = '';
   private _keyedSearch: { [key: string]: Movie | MovieSearch };
 
@@ -34,6 +34,14 @@ export class NewListComponent implements OnInit {
   set searchInput(term) {
     this.store.dispatch(new SearchActions.SubmitSearch(term));
     this._searchInput = term;
+  }
+
+  get listName(): string {
+    return this._listName;
+  }
+
+  set listName(name) {
+    this._listName = _.replace(name, /\s/, '-');
   }
 
   constructor(
@@ -58,7 +66,7 @@ export class NewListComponent implements OnInit {
 
   createList() {
     const list: List = {
-      name: this.listName,
+      name: _.trimEnd(this.listName, '-_'),
       movies: [] // TBD
     };
 

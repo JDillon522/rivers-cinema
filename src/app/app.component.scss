@@ -1,3 +1,8 @@
 /deep/ mat-toolbar-row {
     justify-content: space-between;
 }
+
+.header > a {
+    text-decoration: none;
+    color: inherit;
+}
